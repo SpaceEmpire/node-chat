@@ -1,0 +1,7 @@
+node_modules
+log/*
+public/H5IMG
+public/doc/*
+.idea/*
+dist/*
+try/message.txt
