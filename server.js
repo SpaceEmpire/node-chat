@@ -2,17 +2,18 @@ const http = require('http');
 const fs = require('fs');
 const path = require('path');
 const mime = require('mime');
+const chatServer = require('./lib/chat_server');
 
 let cache = {};
 
 function send404(response) {
-  response.writeHead(404, {'Content-Type': 'text/plain'});
+  response.writeHead(404, { 'Content-Type': 'text/plain' });
   response.write('Error 404：resource not found');
   response.end();
 }
 
 function sendFile(response, filePath, fileContents) {
-  response.writeHead(200, {'content-type': mime.lookup(path.basename(filePath))});
+  response.writeHead(200, { 'content-type': mime.lookup(path.basename(filePath)) });
   response.end(fileContents);
 }
 
@@ -49,6 +50,8 @@ const server = http.createServer(function (request, response) {
   serveStatic(response, cache, absPath);
 });
 
-server.listen(3000,function(){
+chatServer.listen(server);
+
+server.listen(3000, function () {
   console.log('Server listen on port 3000');
 });
